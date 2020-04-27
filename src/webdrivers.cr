@@ -1,4 +1,6 @@
-# TODO: Write documentation for `Webdrivers`
+require "semantic_version"
+require "./webdrivers/**"
+
 module Webdrivers
   VERSION = "0.1.0"
 

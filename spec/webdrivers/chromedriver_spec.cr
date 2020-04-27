@@ -16,7 +16,17 @@ describe Webdrivers::Chromedriver do
   end
 
   describe "#driver_version" do
+    it "returns semver of installed chromedriver" do
+      chromedriver = Webdrivers::Chromedriver.new
 
+      expected_semver = SemanticVersion.new(
+        major: 81,
+        minor: 0,
+        patch: 69,
+        build: "4044"
+      )
+      chromedriver.driver_version.should eq(expected_semver)
+    end
   end
   
   describe "#update" do

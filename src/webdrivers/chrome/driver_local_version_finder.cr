@@ -4,6 +4,8 @@ class Webdrivers::Chrome::DriverLocalVersionFinder
   end
 
   def find
+    return unless File.exists?(driver_path)
+
     binary_version = binary_version(driver_path)
     return if binary_version.nil?
 

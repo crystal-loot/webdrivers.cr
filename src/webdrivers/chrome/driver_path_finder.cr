@@ -7,10 +7,10 @@ class Webdrivers::Chrome::DriverPathFinder
   end
 
   def find
-    File.expand_path(File.join(install_dir, driver_name), home: Path.home)
+    File.join(install_dir, driver_name)
   end
 
   private def install_dir : String
-    DEFAULT_INSTALL_DIR
+    File.expand_path(DEFAULT_INSTALL_DIR, home: Path.home)
   end
 end

@@ -1,5 +1,7 @@
+require "file_utils"
 require "http"
 require "semantic_version"
+require "zip"
 require "./webdrivers/**"
 
 module Webdrivers

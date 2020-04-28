@@ -16,4 +16,12 @@ class Webdrivers::Chromedriver
   def driver_path : String
     Chrome::DriverPathFinder.new.find
   end
+
+  def remove
+    Chrome::DeleteDriverExecutor.new(driver_path).execute
+  end
+
+  def install
+    Chrome::InstallDriverExecutor.new(latest_driver_version.not_nil!, File.dirname(driver_path)).execute
+  end
 end

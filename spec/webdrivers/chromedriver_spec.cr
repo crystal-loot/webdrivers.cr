@@ -10,7 +10,7 @@ describe Webdrivers::Chromedriver do
       expected_semver = SemanticVersion.new(
         major: 81,
         minor: 0,
-        patch: 122,
+        patch: 129,
         build: "4044"
       )
       chromedriver.browser_version.should eq(expected_semver)

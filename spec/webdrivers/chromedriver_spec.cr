@@ -28,6 +28,20 @@ describe Webdrivers::Chromedriver do
       chromedriver.driver_version.should eq(expected_semver)
     end
   end
+
+  describe "#latest_driver_version" do
+    it "returns semver of latest available driver version for download" do
+      chromedriver = Webdrivers::Chromedriver.new
+
+      expected_semver = SemanticVersion.new(
+        major: 81,
+        minor: 0,
+        patch: 69,
+        build: "4044"
+      )
+      chromedriver.latest_driver_version.should eq(expected_semver)
+    end
+  end
   
   describe "#update" do
     pending "does nothing when latest and current version match"

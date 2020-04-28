@@ -1,3 +1,4 @@
+require "http"
 require "semantic_version"
 require "./webdrivers/**"
 

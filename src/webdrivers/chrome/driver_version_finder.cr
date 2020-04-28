@@ -1,11 +1,19 @@
 class Webdrivers::Chrome::DriverVersionFinder
   DEFAULT_INSTALL_DIR = "~/.webdrivers"
 
-  def self.find
+  def self.find_current
     binary_version = binary_version(driver_path)
     return if binary_version.nil?
 
     extract_semver(binary_version)
+  end
+
+  def self.find_latest
+    response = HTTP::Client.get("https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+    raw_version = response.body
+    return if raw_version.nil?
+
+    extract_semver(raw_version)
   end
 
   private def self.driver_path : String

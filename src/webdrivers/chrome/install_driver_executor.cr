@@ -1,8 +1,9 @@
 class Webdrivers::Chrome::InstallDriverExecutor
   getter version : SemanticVersion
   getter download_directory : String
+  getter driver_name : String
 
-  def initialize(@version, @download_directory)
+  def initialize(@version, @download_directory, @driver_name)
   end
 
   def execute
@@ -31,14 +32,6 @@ class Webdrivers::Chrome::InstallDriverExecutor
 
   private def download_url
     "https://chromedriver.storage.googleapis.com/#{converted_version}/chromedriver_mac64.zip"
-  end
-
-  private def driver_name : String
-    {% if flag?(:win32) %}
-      "chromedriver.exe"
-    {% else %}
-      "chromedriver"
-    {% end %}
   end
 
   private def converted_version : String

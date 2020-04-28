@@ -14,7 +14,7 @@ class Webdrivers::Chromedriver
   end
 
   def driver_path : String
-    Chrome::DriverPathFinder.new.find
+    Chrome::DriverPathFinder.new(driver_name).find
   end
 
   def remove
@@ -25,6 +25,18 @@ class Webdrivers::Chromedriver
     latest_version = latest_driver_version
     return if driver_version == latest_version
 
-    Chrome::InstallDriverExecutor.new(latest_version.not_nil!, File.dirname(driver_path)).execute
+    Chrome::InstallDriverExecutor.new(
+      version: latest_version.not_nil!,
+      download_directory: File.dirname(driver_path),
+      driver_name: driver_name
+    ).execute
+  end
+
+  def driver_name : String
+    {% if flag?(:win32) %}
+      "chromedriver.exe"
+    {% else %}
+      "chromedriver"
+    {% end %}
   end
 end

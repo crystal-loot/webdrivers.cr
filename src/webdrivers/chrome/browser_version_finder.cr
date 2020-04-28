@@ -7,7 +7,7 @@ class Webdrivers::Chrome::BrowserVersionFinder
   end
 
   private def self.mac_location : String?
-    directories = ["", File.expand_path("~")]
+    directories = ["", File.expand_path("~", home: Path.home)]
     files = [
       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
       "/Applications/Chromium.app/Contents/MacOS/Chromium"

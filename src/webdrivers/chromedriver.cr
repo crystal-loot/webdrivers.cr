@@ -6,10 +6,14 @@ class Webdrivers::Chromedriver
   end
 
   def driver_version : SemanticVersion?
-    Chrome::DriverVersionFinder.find_current
+    Chrome::DriverLocalVersionFinder.new(driver_path).find
   end
 
   def latest_driver_version : SemanticVersion?
-    Chrome::DriverVersionFinder.find_latest
+    Chrome::DriverRemoteVersionFinder.new.find
+  end
+
+  def driver_path : String
+    Chrome::DriverPathFinder.new.find
   end
 end

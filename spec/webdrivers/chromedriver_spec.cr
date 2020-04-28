@@ -42,12 +42,13 @@ describe Webdrivers::Chromedriver do
       chromedriver.latest_driver_version.should eq(expected_semver)
     end
   end
-  
-  describe "#update" do
-    pending "does nothing when latest and current version match"
-    pending "does nothing when offline"
-    pending "does nothing when unable to find latest release"
-    pending "downloads latest binary if current is older"
-    pending "downloads latest binary if current is missing"
+
+  describe "#driver_path" do
+    it "returns path to installed chromedriver" do
+      chromedriver = Webdrivers::Chromedriver.new
+
+      expected_path = File.expand_path("~/.webdrivers/chromedriver", home: Path.home)
+      chromedriver.driver_path.should eq(expected_path)
+    end
   end
 end

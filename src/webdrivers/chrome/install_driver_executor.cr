@@ -15,10 +15,10 @@ class Webdrivers::Chrome::InstallDriverExecutor
     file_name = File.basename(download_url)
     FileUtils.cd(download_directory) do
       HTTP::Client.get(download_url) do |response|
-        File.write("chromedriver_mac64.zip", response.body_io, mode: "wb")
+        File.write(file_name, response.body_io, mode: "wb")
       end
 
-      tempfile = File.new("chromedriver_mac64.zip", mode: "rb")
+      tempfile = File.new(file_name, mode: "rb")
 
       Zip::File.open(tempfile) do |zip_file|
         driver = zip_file[driver_name]

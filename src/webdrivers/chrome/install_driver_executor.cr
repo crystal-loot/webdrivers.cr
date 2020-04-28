@@ -1,12 +1,15 @@
 class Webdrivers::Chrome::InstallDriverExecutor
-  getter version : SemanticVersion
+  getter install_version : SemanticVersion
+  getter current_version : SemanticVersion?
   getter download_directory : String
   getter driver_name : String
 
-  def initialize(@version, @download_directory, @driver_name)
+  def initialize(@install_version, @download_directory, @driver_name, @current_version)
   end
 
   def execute
+    return if current_version == install_version
+
     Dir.mkdir_p(download_directory) unless File.exists?(download_directory)
 
     file_name = File.basename(download_url)
@@ -35,6 +38,6 @@ class Webdrivers::Chrome::InstallDriverExecutor
   end
 
   private def converted_version : String
-    DriverSemverConverter.convert(version)
+    DriverSemverConverter.convert(install_version)
   end
 end

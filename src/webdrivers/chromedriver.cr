@@ -22,11 +22,9 @@ class Webdrivers::Chromedriver
   end
 
   def install
-    latest_version = latest_driver_version
-    return if driver_version == latest_version
-
     Chrome::InstallDriverExecutor.new(
-      version: latest_version.not_nil!,
+      install_version: latest_driver_version.not_nil!,
+      current_version: driver_version,
       download_directory: File.dirname(driver_path),
       driver_name: driver_name
     ).execute

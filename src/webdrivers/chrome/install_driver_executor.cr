@@ -12,13 +12,8 @@ class Webdrivers::Chrome::InstallDriverExecutor
 
     Dir.mkdir_p(download_directory) unless File.exists?(download_directory)
 
-    file_name = File.basename(download_url)
     FileUtils.cd(download_directory) do
-      HTTP::Client.get(download_url) do |response|
-        File.write(file_name, response.body_io, mode: "wb")
-      end
-
-      tempfile = File.new(file_name, mode: "rb")
+      tempfile = download_file(from: download_url, to: File.basename(download_url))
 
       Zip::File.open(tempfile) do |zip_file|
         driver = zip_file[driver_name]
@@ -31,6 +26,14 @@ class Webdrivers::Chrome::InstallDriverExecutor
       tempfile.delete
       File.chmod(driver_name, 0o0111)
     end
+  end
+
+  private def download_file(from, to) : File
+    HTTP::Client.get(from) do |response|
+      File.write(to, response.body_io, mode: "wb")
+    end
+
+    File.new(to, mode: "rb")
   end
 
   private def download_url

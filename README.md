@@ -1,6 +1,9 @@
-# webdrivers
+# Webdrivers
+
+[![Build status](https://github.com/matthewmcgarvey/webdrivers.cr/workflows/Crystal%20CI/badge.svg)
 
 A Crystal port of the Ruby [webdrivers](https://github.com/titusfortner/webdrivers) gem.
+It automatically installs and updates supported webdrivers.
 
 ## Installation
 

@@ -1,0 +1,31 @@
+name: Crystal CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Crystal
+      run: curl -sSL https://dist.crystal-lang.org/apt/setup.sh | sudo bash
+    - name: Install Crystal
+      run: sudo apt install crystal
+    - name: Install dependencies
+      run: shards install
+    - name: Run tests
+      run: crystal spec
+  build-macos:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Crystal
+      run: brew install crystal
+    - name: Install dependencies
+      run: shards install
+    - name: Run tests
+      run: crystal spec

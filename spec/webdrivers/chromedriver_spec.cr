@@ -73,5 +73,11 @@ describe Webdrivers::Chromedriver do
       chromedriver.install
       File.exists?(chromedriver.driver_path).should be_true
     end
+
+    it "returns the filepath to the installed chromedriver" do
+      chromedriver = Webdrivers::Chromedriver.new
+
+      chromedriver.install.should eq(chromedriver.driver_path)
+    end
   end
 end

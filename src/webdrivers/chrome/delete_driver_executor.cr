@@ -1,5 +1,6 @@
 class Webdrivers::Chrome::DeleteDriverExecutor
   getter driver_path : String
+
   def initialize(@driver_path)
   end
 

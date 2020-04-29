@@ -1,9 +1,9 @@
 class Webdrivers::Chrome::BrowserVersionFinder
-  def self.find : SemanticVersion?
+  def find : SemanticVersion?
     os_specific_version.try { |version| BrowserSemverConverter.convert(version) }
   end
 
-  private def self.os_specific_version : String?
+  private def os_specific_version : String?
     case Common.os
     when Common::OS::Windows
       windows_location.try { |location| windows_version(location) }
@@ -16,7 +16,7 @@ class Webdrivers::Chrome::BrowserVersionFinder
     end
   end
 
-  private def self.windows_location : String?
+  private def windows_location : String?
     envs = ["LOCALAPPDATA", "PROGRAMFILES", "PROGRAMFILES(X86)"]
     directories = ["\\Google\\Chrome\\Application", "\\Chromium\\Application"]
     file = "chrome.exe"
@@ -31,7 +31,7 @@ class Webdrivers::Chrome::BrowserVersionFinder
     nil
   end
 
-  private def self.linux_location : String?
+  private def linux_location : String?
     directories = ["/usr/local/sbin", "/usr/local/bin", "/usr/sbin", "/usr/bin", "/sbin", "/bin", "/snap/bin", "/opt/google/chrome"]
     files = ["google-chrome", "chrome", "chromium", "chromium-browser"]
 
@@ -45,7 +45,7 @@ class Webdrivers::Chrome::BrowserVersionFinder
     nil
   end
 
-  private def self.mac_location : String?
+  private def mac_location : String?
     directories = ["", File.expand_path("~", home: Path.home)]
     files = [
       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -62,21 +62,21 @@ class Webdrivers::Chrome::BrowserVersionFinder
     nil
   end
 
-  private def self.windows_version(location)
+  private def windows_version(location)
     output = Process.run("powershell (Get-ItemProperty '#{location}').VersionInfo.ProductVersion") do |proc|
       proc.output.gets_to_end
     end
     output.strip
   end
 
-  private def self.linux_version(location)
+  private def linux_version(location)
     output = Process.run(location, ["--product-version"]) do |proc|
       proc.output.gets_to_end
     end
     output.strip
   end
 
-  private def self.mac_version(location) : String
+  private def mac_version(location) : String
     output = Process.run(location, ["--version"]) do |proc|
       proc.output.gets_to_end
     end

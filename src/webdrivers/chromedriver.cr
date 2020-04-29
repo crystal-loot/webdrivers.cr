@@ -2,7 +2,7 @@ require "./chrome/**"
 
 class Webdrivers::Chromedriver
   def browser_version : SemanticVersion?
-    Chrome::BrowserVersionFinder.find
+    Chrome::BrowserVersionFinder.new.find
   end
 
   def driver_version : SemanticVersion?

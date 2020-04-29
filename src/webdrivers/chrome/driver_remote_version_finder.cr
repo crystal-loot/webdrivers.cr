@@ -6,11 +6,4 @@ class Webdrivers::Chrome::DriverRemoteVersionFinder
 
     DriverSemverConverter.convert(raw_version)
   end
-
-  private def binary_version(driver_path : String) : String?
-    output = Process.run(driver_path, ["--version"]) do |proc|
-      proc.output.gets_to_end
-    end
-    output.strip
-  end
 end

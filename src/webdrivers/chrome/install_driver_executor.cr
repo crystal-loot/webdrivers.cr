@@ -13,7 +13,7 @@ class Webdrivers::Chrome::InstallDriverExecutor
     Dir.mkdir_p(download_directory) unless File.exists?(download_directory)
 
     FileUtils.cd(download_directory) do
-      zip = download_file(from: download_url, to: File.basename(download_url))
+      zip = download_file(from: download_url, to: download_url_filename)
       extract_zip(zip)
       zip.delete
       File.chmod(driver_name, 0o0111)
@@ -38,10 +38,23 @@ class Webdrivers::Chrome::InstallDriverExecutor
   end
 
   private def download_url
-    "https://chromedriver.storage.googleapis.com/#{converted_version}/chromedriver_mac64.zip"
+    "https://chromedriver.storage.googleapis.com/#{converted_version}/#{download_url_filename}"
   end
 
   private def converted_version : String
     DriverSemverConverter.convert(install_version)
+  end
+
+  private def download_url_filename : String
+    case Common.os
+    when Common::OS::Linux
+      "chromedriver_linux64.zip"
+    when Common::OS::Mac
+      "chromedriver_mac64.zip"
+    when Common::OS::Windows
+      "chromedriver_win32.zip"
+    else
+      raise "Unknown os"
+    end
   end
 end

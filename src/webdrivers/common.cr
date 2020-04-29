@@ -4,8 +4,10 @@ module Webdrivers::Common
       OS::Mac
     {% elsif flag?(:win32) %}
       OS::Windows
-    {% else %}
+    {% elsif flag?(:linux) %}
       OS::Linux
+    {% else %}
+      OS::Other
     {% end %}
   end
 
@@ -13,5 +15,6 @@ module Webdrivers::Common
     Mac
     Linux
     Windows
+    Other
   end
 end

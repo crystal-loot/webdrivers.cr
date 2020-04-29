@@ -43,14 +43,4 @@ class Webdrivers::Chrome::BrowserVersionFinder
       build: match["build"],
     )
   end
-
-  private def self.os : String
-    {% if flag?(:linux) %}
-      "linux"
-    {% elsif flag?(:darwin) %}
-      "mac"
-    {% else %}
-      raise "This OS is not supported yet."
-    {% end %}
-  end
 end

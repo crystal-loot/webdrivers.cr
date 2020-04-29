@@ -31,10 +31,10 @@ class Webdrivers::Chromedriver
   end
 
   def driver_name : String
-    {% if flag?(:win32) %}
+    if Common.os == Common::OS::Windows
       "chromedriver.exe"
-    {% else %}
+    else
       "chromedriver"
-    {% end %}
+    end
   end
 end

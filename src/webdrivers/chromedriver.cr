@@ -1,27 +1,27 @@
 require "./chrome/**"
 
 class Webdrivers::Chromedriver
-  def browser_version : SemanticVersion?
+  def self.browser_version : SemanticVersion?
     Chrome::BrowserVersionFinder.new.find
   end
 
-  def driver_version : SemanticVersion?
+  def self.driver_version : SemanticVersion?
     Chrome::DriverLocalVersionFinder.new(driver_path).find
   end
 
-  def latest_driver_version : SemanticVersion?
+  def self.latest_driver_version : SemanticVersion?
     Chrome::DriverRemoteVersionFinder.new.find
   end
 
-  def driver_path : String
+  def self.driver_path : String
     Chrome::DriverPathFinder.new(driver_name).find
   end
 
-  def remove
+  def self.remove
     Chrome::DeleteDriverExecutor.new(driver_path).execute
   end
 
-  def install : String
+  def self.install : String
     Chrome::InstallDriverExecutor.new(
       install_version: latest_driver_version.not_nil!,
       current_version: driver_version,
@@ -31,7 +31,7 @@ class Webdrivers::Chromedriver
     driver_path
   end
 
-  def driver_name : String
+  def self.driver_name : String
     if Common.os == Common::OS::Windows
       "chromedriver.exe"
     else

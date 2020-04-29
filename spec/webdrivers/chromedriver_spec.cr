@@ -1,83 +1,77 @@
 require "../spec_helper"
 
 describe Webdrivers::Chromedriver do
-  before_each { Webdrivers::Chromedriver.new.install }
+  before_each { Webdrivers::Chromedriver.install }
 
-  describe "#browser_version" do
+  describe ".browser_version" do
     it "returns semver of installed browser version" do
-      chromedriver = Webdrivers::Chromedriver.new
-
       expected_semver = SemanticVersion.new(
         major: 81,
         minor: 0,
         patch: 129,
         build: "4044"
       )
-      chromedriver.browser_version.should eq(expected_semver)
+
+      Webdrivers::Chromedriver.browser_version.should eq(expected_semver)
     end
   end
 
-  describe "#driver_version" do
+  describe ".driver_version" do
     it "returns semver of installed chromedriver" do
-      chromedriver = Webdrivers::Chromedriver.new
-
       expected_semver = SemanticVersion.new(
         major: 81,
         minor: 0,
         patch: 69,
         build: "4044"
       )
-      chromedriver.driver_version.should eq(expected_semver)
+
+      Webdrivers::Chromedriver.driver_version.should eq(expected_semver)
     end
   end
 
-  describe "#latest_driver_version" do
+  describe ".latest_driver_version" do
     it "returns semver of latest available driver version for download" do
-      chromedriver = Webdrivers::Chromedriver.new
-
       expected_semver = SemanticVersion.new(
         major: 81,
         minor: 0,
         patch: 69,
         build: "4044"
       )
-      chromedriver.latest_driver_version.should eq(expected_semver)
+
+      Webdrivers::Chromedriver.latest_driver_version.should eq(expected_semver)
     end
   end
 
-  describe "#driver_path" do
+  describe ".driver_path" do
     it "returns path to installed chromedriver" do
-      chromedriver = Webdrivers::Chromedriver.new
-
       expected_path = File.expand_path("~/.webdrivers/chromedriver", home: Path.home)
-      chromedriver.driver_path.should eq(expected_path)
+
+      Webdrivers::Chromedriver.driver_path.should eq(expected_path)
     end
   end
 
-  describe "#remove" do
+  describe ".remove" do
     it "deletes chromedriver" do
-      chromedriver = Webdrivers::Chromedriver.new
-
-      File.exists?(chromedriver.driver_path).should be_true
-      chromedriver.remove
-      File.exists?(chromedriver.driver_path).should be_false
+      File.exists?(Webdrivers::Chromedriver.driver_path).should be_true
+      Webdrivers::Chromedriver.remove
+      File.exists?(Webdrivers::Chromedriver.driver_path).should be_false
     end
   end
 
-  describe "#install" do
+  describe ".install" do
     it "installs the latest chromedriver" do
-      chromedriver = Webdrivers::Chromedriver.new
-      chromedriver.remove
+      Webdrivers::Chromedriver.remove
+      driver_path = Webdrivers::Chromedriver.driver_path
 
-      File.exists?(chromedriver.driver_path).should be_false
-      chromedriver.install
-      File.exists?(chromedriver.driver_path).should be_true
+      File.exists?(driver_path).should be_false
+      Webdrivers::Chromedriver.install
+      File.exists?(driver_path).should be_true
     end
 
     it "returns the filepath to the installed chromedriver" do
-      chromedriver = Webdrivers::Chromedriver.new
+      expected_path = Webdrivers::Chromedriver.driver_path
 
-      chromedriver.install.should eq(chromedriver.driver_path)
+      Webdrivers::Chromedriver.install.should eq(expected_path)
     end
   end
 end

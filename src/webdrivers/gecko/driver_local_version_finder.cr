@@ -17,6 +17,6 @@ class Webdrivers::Gecko::DriverLocalVersionFinder
     output = Process.run(driver_path, ["--version"]) do |proc|
       proc.output.gets_to_end
     end
-    output.strip.match(/geckodriver (\d+\.\d+\.\d+)/).try &.[1]
+    output.match(/geckodriver (\d+\.\d+\.\d+)/).try &.[1]
   end
 end

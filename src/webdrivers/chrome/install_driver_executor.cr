@@ -16,7 +16,7 @@ class Webdrivers::Chrome::InstallDriverExecutor
       zip = download_file(from: download_url, to: download_url_filename)
       Common::ZipExtractor.new(zip, driver_name, driver_directory).extract
       zip.delete
-      File.chmod(driver_name, 0o0111)
+      File.chmod(driver_name, Common::EXECUTABLE_PERMISSIONS)
     end
   end
 

@@ -1,4 +1,5 @@
 module Webdrivers::Common
+  EXECUTABLE_PERMISSIONS = 0x7777
   def self.os : OS
     {% if flag?(:darwin) %}
       OS::Mac

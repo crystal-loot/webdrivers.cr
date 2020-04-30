@@ -16,7 +16,7 @@ class Webdrivers::Gecko::InstallDriverExecutor
       downloaded_file = download_file(from: download_url, to: download_url_filename)
       extract_file(downloaded_file)
       downloaded_file.delete
-      File.chmod(driver_name, 0o0111)
+      File.chmod(driver_name, Common::EXECUTABLE_PERMISSIONS)
     end
   end
 

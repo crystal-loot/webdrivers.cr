@@ -24,15 +24,19 @@ It automatically installs and updates supported webdrivers.
 require "webdrivers"
 ```
 
-### Chrome
+On whichever driver you use, calling `.install` will install, update the local driver if needed and then return the path to it.
 
-To use the chromedriver do:
+### Chrome
 
 ```crystal
 webdriver_path = Webdrivers::Chromedriver.install
 ```
 
-This will install or update or local webdriver to the most recent version and return the path to it.
+### Firefox (Gecko)
+
+```crystal
+webdriver_path = Webdrivers::Geckodriver.install
+```
 
 ## Development
 

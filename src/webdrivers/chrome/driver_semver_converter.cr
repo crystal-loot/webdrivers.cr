@@ -13,8 +13,6 @@ class Webdrivers::Chrome::DriverSemverConverter
   end
 
   def self.convert(semver : SemanticVersion) : String
-    "#{semver.major}.#{semver.minor}.#{semver.build}"
-
     build = (semver.build || "0").to_i
     [semver.major, semver.minor, build, semver.patch].join(".")
   end

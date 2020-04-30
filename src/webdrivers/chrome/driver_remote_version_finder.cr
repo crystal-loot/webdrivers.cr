@@ -9,7 +9,7 @@ class Webdrivers::Chrome::DriverRemoteVersionFinder
   end
 
   private def find_raw_version
-    Cache.fetch(cache_path, cache_duration) do
+    Cache.fetch(cache_path, Webdrivers.settings.cache_duration) do
       response = HTTP::Client.get("https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
       response.body
     end
@@ -17,9 +17,5 @@ class Webdrivers::Chrome::DriverRemoteVersionFinder
 
   private def cache_path
     File.join(driver_directory, "chromedriver.version")
-  end
-
-  private def cache_duration
-    24.hours
   end
 end

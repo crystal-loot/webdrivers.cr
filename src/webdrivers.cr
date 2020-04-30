@@ -11,5 +11,6 @@ module Webdrivers
 
   Habitat.create do
     setting driver_directory : String = DEFAULT_DRIVER_DIRECTORY
+    setting cache_duration : Time::Span = 24.hours
   end
 end

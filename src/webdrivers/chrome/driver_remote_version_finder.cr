@@ -1,9 +1,25 @@
 class Webdrivers::Chrome::DriverRemoteVersionFinder
-  def find
-    response = HTTP::Client.get("https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
-    raw_version = response.body
-    return if raw_version.nil?
+  getter driver_directory : String
 
-    DriverSemverConverter.convert(raw_version)
+  def initialize(@driver_directory)
+  end
+
+  def find : SemanticVersion?
+    find_raw_version.try { |raw_version| DriverSemverConverter.convert(raw_version) }
+  end
+
+  private def find_raw_version
+    Cache.fetch(cache_path, cache_duration) do
+      response = HTTP::Client.get("https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+      response.body
+    end
+  end
+
+  private def cache_path
+    File.join(driver_directory, "chromedriver.version")
+  end
+
+  private def cache_duration
+    24.hours
   end
 end

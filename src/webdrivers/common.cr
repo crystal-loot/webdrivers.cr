@@ -11,6 +11,10 @@ module Webdrivers::Common
     {% end %}
   end
 
+  def self.driver_directory
+    DriverDirectoryFinder.new.find
+  end
+
   enum OS
     Mac
     Linux

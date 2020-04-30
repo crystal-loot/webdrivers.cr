@@ -1,18 +1,18 @@
 class Webdrivers::Chrome::InstallDriverExecutor
   getter install_version : SemanticVersion
   getter current_version : SemanticVersion?
-  getter download_directory : String
+  getter driver_directory : String
   getter driver_name : String
 
-  def initialize(@install_version, @download_directory, @driver_name, @current_version)
+  def initialize(@install_version, @driver_directory, @driver_name, @current_version)
   end
 
   def execute
     return if current_version == install_version
 
-    Dir.mkdir_p(download_directory) unless File.exists?(download_directory)
+    Dir.mkdir_p(driver_directory) unless File.exists?(driver_directory)
 
-    FileUtils.cd(download_directory) do
+    FileUtils.cd(driver_directory) do
       zip = download_file(from: download_url, to: download_url_filename)
       extract_zip(zip)
       zip.delete

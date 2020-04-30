@@ -42,7 +42,7 @@ class Webdrivers::Chrome::InstallDriverExecutor
   end
 
   private def converted_version : String
-    DriverSemverConverter.convert(install_version)
+    SemverConverter.convert(install_version)
   end
 
   private def download_url_filename : String

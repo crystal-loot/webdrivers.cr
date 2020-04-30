@@ -1,4 +1,4 @@
-class Webdrivers::Chrome::DriverSemverConverter
+class Webdrivers::Chrome::SemverConverter
   def self.convert(raw_semver : String) : SemanticVersion?
     match = raw_semver.match(/(?<major>\d+)\.(?<minor>\d+)(\.(?<build>\d+))?(\.(?<patch>\d+))?/)
     return if match.nil?

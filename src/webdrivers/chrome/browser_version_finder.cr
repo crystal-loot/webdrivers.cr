@@ -1,6 +1,6 @@
 class Webdrivers::Chrome::BrowserVersionFinder
   def find : SemanticVersion?
-    os_specific_version.try { |version| BrowserSemverConverter.convert(version) }
+    os_specific_version.try { |version| SemverConverter.convert(version) }
   end
 
   private def os_specific_version : String?

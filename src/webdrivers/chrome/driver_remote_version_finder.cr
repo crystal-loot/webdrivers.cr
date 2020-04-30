@@ -5,7 +5,7 @@ class Webdrivers::Chrome::DriverRemoteVersionFinder
   end
 
   def find : SemanticVersion?
-    find_raw_version.try { |raw_version| DriverSemverConverter.convert(raw_version) }
+    find_raw_version.try { |raw_version| SemverConverter.convert(raw_version) }
   end
 
   private def find_raw_version

@@ -10,7 +10,7 @@ class Webdrivers::Chrome::DriverLocalVersionFinder
     binary_version = binary_version(driver_path)
     return if binary_version.nil?
 
-    DriverSemverConverter.convert(binary_version)
+    SemverConverter.convert(binary_version)
   end
 
   private def binary_version(driver_path : String) : String?

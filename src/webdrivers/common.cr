@@ -12,7 +12,7 @@ module Webdrivers::Common
   end
 
   def self.driver_directory
-    DriverDirectoryFinder.new.find
+    File.expand_path(Webdrivers.settings.driver_directory, home: Path.home)
   end
 
   enum OS

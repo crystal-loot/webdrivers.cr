@@ -14,11 +14,7 @@ class Webdrivers::Gecko::InstallDriverExecutor
 
     FileUtils.cd(driver_directory) do
       downloaded_file = download_file(from: download_url, to: download_url_filename)
-      if tar_file?
-        Common::TarGzExtractor.new(downloaded_file, driver_name, driver_directory).extract
-      else
-        Common::ZipExtractor.new(downloaded_file, driver_name, driver_directory).extract
-      end
+      extract_file(downloaded_file)
       downloaded_file.delete
       File.chmod(driver_name, 0o0111)
     end
@@ -32,6 +28,14 @@ class Webdrivers::Gecko::InstallDriverExecutor
     end
 
     File.new(to)
+  end
+
+  private def extract_file(file)
+    if tar_file?
+      Common::TarGzExtractor.new(file, driver_name, driver_directory).extract
+    else
+      Common::ZipExtractor.new(file, driver_name, driver_directory).extract
+    end
   end
 
   private def download_url

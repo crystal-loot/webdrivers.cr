@@ -14,7 +14,7 @@ class Webdrivers::Chrome::InstallDriverExecutor
 
     FileUtils.cd(driver_directory) do
       zip = download_file(from: download_url, to: download_url_filename)
-      extract_zip(zip)
+      Common::ZipExtractor.new(zip, driver_name, driver_directory).extract
       zip.delete
       File.chmod(driver_name, 0o0111)
     end
@@ -26,15 +26,6 @@ class Webdrivers::Chrome::InstallDriverExecutor
     end
 
     File.new(to, mode: "rb")
-  end
-
-  private def extract_zip(zip)
-    Zip::File.open(zip) do |zip_contents|
-      driver = zip_contents[driver_name]
-      dest_path = File.join(FileUtils.pwd, driver.filename)
-      File.delete(dest_path) if File.exists?(dest_path)
-      driver.open { |io| File.write(dest_path, io) }
-    end
   end
 
   private def download_url

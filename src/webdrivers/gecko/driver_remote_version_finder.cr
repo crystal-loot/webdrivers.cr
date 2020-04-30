@@ -11,7 +11,7 @@ class Webdrivers::Gecko::DriverRemoteVersionFinder
 
   private def find_raw_version
     Cache.fetch(cache_path, Webdrivers.settings.cache_duration) do
-      response = Halite.get(
+      response = Halite.follow.get(
         "https://github.com/mozilla/geckodriver/releases/latest",
         headers: { "Accept" => "application/json" }
       )

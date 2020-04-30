@@ -16,4 +16,4 @@ dependencies:
     version: ~> 0.1.5
   halite:
     github: icyleaf/halite
-    branch: master
+    version: ~> 0.10.5

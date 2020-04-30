@@ -58,7 +58,6 @@ class Webdrivers::Gecko::InstallDriverExecutor
       "geckodriver-#{version_tag}-macos.tar.gz"
     when Common::OS::Windows
       "geckodriver-#{version_tag}-win64.zip"
-      "geckodriver_win32.zip"
     else
       raise "Unknown os"
     end

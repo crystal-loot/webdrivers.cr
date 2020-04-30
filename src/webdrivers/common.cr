@@ -15,6 +15,12 @@ module Webdrivers::Common
     File.expand_path(Webdrivers.settings.driver_directory, home: Path.home)
   end
 
+  def self.remove(driver_path)
+    return unless File.exists?(driver_path)
+
+    File.delete(driver_path)
+  end
+
   enum OS
     Mac
     Linux

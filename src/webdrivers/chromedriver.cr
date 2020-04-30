@@ -18,7 +18,7 @@ class Webdrivers::Chromedriver
   end
 
   def self.remove
-    Chrome::DeleteDriverExecutor.new(driver_path).execute
+    Common.remove(driver_path)
   end
 
   def self.install : String

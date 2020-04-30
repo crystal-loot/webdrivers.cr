@@ -2,10 +2,12 @@ name: webdrivers
 version: 0.1.0
 description: |
   Helps manage drivers for Selenium, such as the Chromedriver.
-
 authors:
   - Matthew McGarvey <tnraptor14@hotmail.com>
-
 crystal: 0.34.0
-
 license: MIT
+
+dependencies:
+  habitat:
+    github: luckyframework/habitat
+    version: ~> 0.4.3

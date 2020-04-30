@@ -13,7 +13,7 @@ It automatically installs and updates supported webdrivers.
    dependencies:
      webdrivers:
        github: matthewmcgarvey/webdrivers.cr
-       version: ~> 0.1.0
+       version: ~> 0.2.0
    ```
 
 2. Run `shards install`

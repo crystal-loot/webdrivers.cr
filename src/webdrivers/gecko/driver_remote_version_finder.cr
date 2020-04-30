@@ -11,11 +11,12 @@ class Webdrivers::Gecko::DriverRemoteVersionFinder
 
   private def find_raw_version
     Cache.fetch(cache_path, Webdrivers.settings.cache_duration) do
-      response = HTTP::Client.get("https://github.com/mozilla/geckodriver/releases/latest")
-      raise response.body if response.status_code != 302 # expect a redirect
-      response = HTTP::Client.get(response.headers["location"], headers: HTTP::Headers{"Accept" => "application/json"})
+      response = Halite.get(
+        "https://github.com/mozilla/geckodriver/releases/latest",
+        headers: { "Accept" => "application/json" }
+      )
       raise response.body if response.status_code >= 300
-      tag = JSON.parse(response.body)["tag_name"]?.try &.as_s
+      tag = response.parse["tag_name"]?.try &.as_s
       tag.try &.lchop('v') # the tags are always like v1.0.0
     end
   end

@@ -13,6 +13,7 @@ It automatically installs and updates supported webdrivers.
    dependencies:
      webdrivers:
        github: matthewmcgarvey/webdrivers.cr
+       version: ~> 0.1.0
    ```
 
 2. Run `shards install`
@@ -23,7 +24,15 @@ It automatically installs and updates supported webdrivers.
 require "webdrivers"
 ```
 
-TODO: Write usage instructions here
+### Chrome
+
+To use the chromedriver do:
+
+```crystal
+webdriver_path = Webdrivers::Chromedriver.install
+```
+
+This will install or update or local webdriver to the most recent version and return the path to it.
 
 ## Development
 

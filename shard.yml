@@ -11,3 +11,9 @@ dependencies:
   habitat:
     github: luckyframework/habitat
     version: ~> 0.4.3
+  crystar:
+    github: naqvis/crystar
+    version: ~> 0.1.5
+  halite:
+    github: icyleaf/halite
+    branch: master

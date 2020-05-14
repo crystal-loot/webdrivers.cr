@@ -16,7 +16,7 @@ class Webdrivers::Gecko::DriverRemoteVersionFinder
         headers = HTTP::Headers{ "Accept" => "application/json" }
         HTTP::Client.get(redirect_location, headers: headers) do |response|
           raise response.body if response.status_code >= 300
-          tag = JSON.parse(response.body)["tag_name"]?.try &.as_s
+          tag = JSON.parse(response.body_io)["tag_name"]?.try &.as_s
           tag.try &.lchop('v') # the tags are always like v1.0.0
         end
       end

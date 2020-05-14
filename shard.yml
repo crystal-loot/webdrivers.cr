@@ -14,6 +14,3 @@ dependencies:
   crystar:
     github: naqvis/crystar
     version: ~> 0.1.5
-  halite:
-    github: icyleaf/halite
-    version: ~> 0.10.5

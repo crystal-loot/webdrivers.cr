@@ -29,8 +29,6 @@ class Webdrivers::Chromedriver
       driver_name: driver_name
     ).execute
     driver_path
-  rescue err
-    raise InstallationError.new("There was a problem installing chromedriver", cause: err)
   end
 
   def self.driver_name : String

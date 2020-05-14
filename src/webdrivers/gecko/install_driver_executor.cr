@@ -21,9 +21,9 @@ class Webdrivers::Gecko::InstallDriverExecutor
   end
 
   private def download_file(from, to) : File
-    Halite.get(from) do |response|
-      File.open(to, "w") do |file|
-        IO.copy(response.body_io, file)
+    HTTP::Client.get(from) do |redirect_response|
+      HTTP::Client.get(redirect_response.headers["location"]) do |response|
+        File.write(to, response.body_io)
       end
     end
 

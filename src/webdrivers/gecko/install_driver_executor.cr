@@ -18,8 +18,6 @@ class Webdrivers::Gecko::InstallDriverExecutor
       downloaded_file.delete
       File.chmod(driver_name, Common::EXECUTABLE_PERMISSIONS)
     end
-  rescue err
-    raise InstallationError.new("There was a problem installing geckodriver", cause: err)
   end
 
   private def download_file(from, to) : File

@@ -18,8 +18,6 @@ class Webdrivers::Chrome::InstallDriverExecutor
       zip.delete
       File.chmod(driver_name, Common::EXECUTABLE_PERMISSIONS)
     end
-  rescue err
-    raise InstallationError.new("There was a problem installing chromedriver", cause: err)
   end
 
   private def download_file(from, to) : File

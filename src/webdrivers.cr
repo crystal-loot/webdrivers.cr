@@ -9,7 +9,7 @@ require "zip"
 require "./webdrivers/**"
 
 module Webdrivers
-  VERSION = "0.2.4"
+  VERSION = "0.2.5"
   DEFAULT_DRIVER_DIRECTORY = "~/.webdrivers"
 
   Habitat.create do

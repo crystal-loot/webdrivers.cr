@@ -1,5 +1,6 @@
 # Webdrivers
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/matthewmcgarvey/webdrivers.cr)
 ![Build status](https://github.com/matthewmcgarvey/webdrivers.cr/workflows/Crystal%20CI/badge.svg)
 
 A Crystal port of the Ruby [webdrivers](https://github.com/titusfortner/webdrivers) gem.
@@ -13,7 +14,6 @@ It automatically installs and updates supported webdrivers.
    dependencies:
      webdrivers:
        github: matthewmcgarvey/webdrivers.cr
-       version: ~> 0.2.2
    ```
 
 2. Run `shards install`

@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install Crystal
-      run: brew install crystal
+      run: brew update && brew install crystal
     - name: Install dependencies
       run: shards install
     - name: Run tests

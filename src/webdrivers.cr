@@ -1,11 +1,11 @@
+require "compress/gzip"
+require "compress/zip"
 require "crystar"
 require "file_utils"
-require "gzip"
 require "habitat"
 require "http"
 require "json"
 require "semantic_version"
-require "zip"
 require "./webdrivers/**"
 
 module Webdrivers

@@ -7,7 +7,7 @@ class Webdrivers::Common::TarGzExtractor
   end
 
   def extract
-    Gzip::Reader.open(file) do |gzip|
+    Compress::Gzip::Reader.open(file) do |gzip|
       Crystar::Reader.open(gzip) do |tar|
         entry = tar.next_entry.not_nil!
         destination_path = File.join(install_path, entry.name)

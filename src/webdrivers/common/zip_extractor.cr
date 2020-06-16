@@ -7,7 +7,7 @@ class Webdrivers::Common::ZipExtractor
   end
 
   def extract
-    Zip::File.open(zip_file) do |zip_contents|
+    Compress::Zip::File.open(zip_file) do |zip_contents|
       driver = zip_contents[driver_name]
       destination_path = File.join(install_path, driver.filename)
       File.delete(destination_path) if File.exists?(destination_path)

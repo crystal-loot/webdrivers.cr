@@ -3,7 +3,7 @@ version: 0.3.0
 description: |
   Helps manage drivers for Selenium, such as the Chromedriver.
 authors:
-  - Matthew McGarvey <tnraptor14@hotmail.com>
+  - Matthew McGarvey <matthewmcgarvey14@gmail.com>
 crystal: 0.35.0
 license: MIT
 

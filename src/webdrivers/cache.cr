@@ -1,4 +1,4 @@
-module Cache
+module Webdrivers::Cache
   def self.fetch(cache_path : String, expires_in : Time::Span, &block)
     value = read(cache_path, expires_in)
     return value if value
@@ -18,7 +18,7 @@ module Cache
   private def self.read(cache_path, expires_in) : String?
     return unless File.exists?(cache_path)
 
-    actual_duration = File.info(cache_path).modification_time - Time.utc
+    actual_duration = Time.utc - File.info(cache_path).modification_time
     return if actual_duration >= expires_in
 
     File.read(cache_path)

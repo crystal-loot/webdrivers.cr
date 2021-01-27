@@ -40,6 +40,10 @@ jobs:
       with:
         crystal: ${{matrix.crystal}}
     - name: Install dependencies
+      if: ${{ matrix.crystal != 'nightly' }}
       run: shards install
+    - name: Install dependencies
+      if: ${{ matrix.crystal == 'nightly' }}
+      run: shards install --ignore-crystal-version
     - name: Run tests
       run: crystal spec

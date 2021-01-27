@@ -36,9 +36,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install Crystal
-        uses: oprypin/install-crystal@v1
-        with:
-          crystal: ${{matrix.crystal}}
+      uses: oprypin/install-crystal@v1
+      with:
+        crystal: ${{matrix.crystal}}
     - name: Install dependencies
       run: shards install
     - name: Run tests

@@ -1,5 +1,5 @@
 name: webdrivers
-version: 0.3.2
+version: 0.4.0
 description: |
   Helps manage drivers for Selenium, such as the Chromedriver.
 authors:

@@ -12,9 +12,9 @@ dependencies:
     github: luckyframework/habitat
     version: ~> 0.4.7
   crystar:
-    github: naqvis/crystar
-    version: ~> 0.2.0
+    git: https://github.com/naqvis/crystar.git
+    commit: 56db8bb9dfbd5ed6d7908353405a5fae632a6561
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.14.1
+    version: ~> 1.1.0

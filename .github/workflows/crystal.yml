@@ -40,8 +40,6 @@ jobs:
         with:
           crystal: ${{matrix.crystal}}
       - name: Install dependencies
-        run: shards install
-      - name: Install dependencies
         run: shards install --ignore-crystal-version --skip-executables --skip-postinstall
       - name: Run tests
         run: crystal spec

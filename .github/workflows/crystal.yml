@@ -1,4 +1,4 @@
-name: Crystal CI
+name: Webdrivers CI
 
 on:
   push:
@@ -10,9 +10,9 @@ jobs:
   check-format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Install Crystal
-        uses: oprypin/install-crystal@v1
+        uses: crystal-lang/install-crystal@v1
         with:
           crystal: latest
       - name: Install shards
@@ -34,14 +34,14 @@ jobs:
             crystal: latest
     runs-on: ${{matrix.os}}
     steps:
-    - uses: actions/checkout@v2
-    - name: Install Crystal
-      uses: oprypin/install-crystal@v1
-      with:
-        crystal: ${{matrix.crystal}}
-    - name: Install dependencies
-      run: shards install
-    - name: Install dependencies
-      run: shards install --ignore-crystal-version --skip-executables --skip-postinstall
-    - name: Run tests
-      run: crystal spec
+      - uses: actions/checkout@v3
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: ${{matrix.crystal}}
+      - name: Install dependencies
+        run: shards install
+      - name: Install dependencies
+        run: shards install --ignore-crystal-version --skip-executables --skip-postinstall
+      - name: Run tests
+        run: crystal spec

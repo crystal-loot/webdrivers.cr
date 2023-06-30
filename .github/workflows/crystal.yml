@@ -28,8 +28,8 @@ jobs:
         include:
           - os: ubuntu-latest
             crystal: latest
-          - os: ubuntu-latest
-            crystal: nightly
+          - os: windows-latest
+            crystal: latest
           - os: macos-latest
             crystal: latest
     runs-on: ${{matrix.os}}
@@ -40,10 +40,8 @@ jobs:
       with:
         crystal: ${{matrix.crystal}}
     - name: Install dependencies
-      if: ${{ matrix.crystal != 'nightly' }}
       run: shards install
     - name: Install dependencies
-      if: ${{ matrix.crystal == 'nightly' }}
       run: shards install --ignore-crystal-version
     - name: Run tests
       run: crystal spec

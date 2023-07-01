@@ -20,7 +20,7 @@ class Webdrivers::Chrome::BrowserVersionFinder
     envs = ["LOCALAPPDATA", "PROGRAMFILES", "PROGRAMFILES(X86)"]
     directories = [
       Path.new("Google", "Chrome", "Applications"),
-      Path.new("Chromium", "Application")
+      Path.new("Chromium", "Application"),
     ]
     file = "chrome.exe"
 

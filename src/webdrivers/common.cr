@@ -20,7 +20,11 @@ module Webdrivers::Common
   def self.remove(driver_path)
     return unless File.exists?(driver_path)
 
-    File.delete(driver_path)
+    if os.windows?
+      File.delete(driver_path, 0o666)
+    else
+      File.delete(driver_path)
+    end
   end
 
   enum OS

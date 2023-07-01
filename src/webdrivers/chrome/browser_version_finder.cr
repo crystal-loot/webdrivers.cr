@@ -18,7 +18,10 @@ class Webdrivers::Chrome::BrowserVersionFinder
 
   private def windows_location : String?
     envs = ["LOCALAPPDATA", "PROGRAMFILES", "PROGRAMFILES(X86)"]
-    directories = ["\\Google\\Chrome\\Application", "\\Chromium\\Application"]
+    directories = [
+      Path.new("Google", "Chrome", "Applications"),
+      Path.new("Chromium", "Application"),
+    ]
     file = "chrome.exe"
 
     directories.each do |dir|
@@ -63,7 +66,7 @@ class Webdrivers::Chrome::BrowserVersionFinder
   end
 
   private def windows_version(location)
-    output = Process.run("powershell (Get-ItemProperty '#{location}').VersionInfo.ProductVersion") do |proc|
+    output = Process.run("powershell", ["(Get-ItemProperty '#{location}').VersionInfo.ProductVersion"]) do |proc|
       proc.output.gets_to_end
     end
     output.strip

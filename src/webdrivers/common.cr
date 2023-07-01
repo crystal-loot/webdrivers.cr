@@ -20,6 +20,10 @@ module Webdrivers::Common
   def self.remove(driver_path)
     return unless File.exists?(driver_path)
 
+    if os.windows?
+      File.chmod(driver_path, 0o666)
+    end
+
     File.delete(driver_path)
   end
 

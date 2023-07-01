@@ -21,10 +21,10 @@ module Webdrivers::Common
     return unless File.exists?(driver_path)
 
     if os.windows?
-      File.delete(driver_path, 0o666)
-    else
-      File.delete(driver_path)
+      File.chmod(driver_path, 0o666)
     end
+
+    File.delete(driver_path)
   end
 
   enum OS

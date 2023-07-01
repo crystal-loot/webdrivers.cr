@@ -35,6 +35,10 @@ jobs:
     runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v3
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+        if: matrix.os == 'windows-latest'
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
         with:

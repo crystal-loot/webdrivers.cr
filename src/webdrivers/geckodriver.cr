@@ -16,12 +16,14 @@ class Webdrivers::Geckodriver
   end
 
   def self.install : String
-    Gecko::InstallDriverExecutor.new(
-      install_version: latest_driver_version.not_nil!,
-      current_version: driver_version,
-      driver_directory: Common.driver_directory,
-      driver_name: driver_name
-    ).execute
+    if install_version = latest_driver_version
+      Gecko::InstallDriverExecutor.new(
+        install_version: install_version,
+        current_version: driver_version,
+        driver_directory: Common.driver_directory,
+        driver_name: driver_name
+      ).execute
+    end
     driver_path
   end
 

@@ -14,7 +14,3 @@ dependencies:
   crystar:
     git: https://github.com/naqvis/crystar.git
     commit: 56db8bb9dfbd5ed6d7908353405a5fae632a6561
-development_dependencies:
-  ameba:
-    github: crystal-ameba/ameba
-    version: ~> 1.1.0

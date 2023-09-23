@@ -12,7 +12,7 @@ class Webdrivers::Chrome::DriverRemoteVersionFinder
 
   private def find_raw_version
     Cache.fetch(cache_path, Webdrivers.settings.cache_duration) do
-      response = HTTP::Client.get("https://chromedriver.storage.googleapis.com/#{latest_release}")
+      response = HTTP::Client.get("https://googlechromelabs.github.io/chrome-for-testing/#{latest_release}")
       response.body
     end
   end

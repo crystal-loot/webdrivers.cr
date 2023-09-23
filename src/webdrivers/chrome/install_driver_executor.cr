@@ -29,7 +29,7 @@ class Webdrivers::Chrome::InstallDriverExecutor
   end
 
   private def download_url
-    "https://chromedriver.storage.googleapis.com/#{converted_version}/#{download_url_filename}"
+    "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/#{converted_version}/linux64/#{download_url_filename}"
   end
 
   private def converted_version : String
@@ -39,7 +39,7 @@ class Webdrivers::Chrome::InstallDriverExecutor
   private def download_url_filename : String
     case Common.os
     when Common::OS::Linux
-      "chromedriver_linux64.zip"
+      "chromedriver-linux64.zip"
     when Common::OS::Mac
       "chromedriver_mac64.zip"
     when Common::OS::Windows

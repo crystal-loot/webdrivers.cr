@@ -14,7 +14,7 @@ class Webdrivers::Chrome::InstallDriverExecutor
 
     FileUtils.cd(driver_directory) do
       zip = download_file(from: download_url, to: download_url_filename)
-      Common::ZipExtractor.new(zip, driver_name, driver_directory).extract
+      Common::ZipExtractor.new(zip, File.join("chromedriver-#{download_url_platform}", driver_name), driver_directory).extract
       zip.delete
       File.chmod(driver_name, Common::EXECUTABLE_PERMISSIONS)
     end
@@ -28,12 +28,30 @@ class Webdrivers::Chrome::InstallDriverExecutor
     File.new(to, mode: "rb")
   end
 
-  private def download_url
-    "https://chromedriver.storage.googleapis.com/#{converted_version}/#{download_url_filename}"
+  private def download_url : String
+    response = HTTP::Client.get(Webdrivers::Chrome::DriverRemoteVersionFinder::MANIFEST_API_ENDPOINT)
+    google = JSON.parse(response.body.to_s)
+    downloads = google.dig("channels", "Stable", "downloads", "chromedriver").as_a
+    platform = downloads.find! { |version| version["platform"].as_s == download_url_platform }
+    platform["url"].as_s
   end
 
   private def converted_version : String
     SemverConverter.convert(install_version)
+  end
+
+  # TODO: Support Win64, and Mac Intel
+  private def download_url_platform : String
+    case Common.os
+    when Common::OS::Linux
+      "linux64"
+    when Common::OS::Mac
+      "mac-arm64"
+    when Common::OS::Windows
+      "win32"
+    else
+      raise "Unknown os"
+    end
   end
 
   private def download_url_filename : String

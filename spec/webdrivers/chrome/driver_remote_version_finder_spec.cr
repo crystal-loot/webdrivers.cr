@@ -7,8 +7,7 @@ module Webdrivers::Chrome
       File.delete(finder.cache_path) if File.exists?(finder.cache_path)
     end
 
-    # TODO: Figure out if this is necessary
-    pending "will limit return version to matching major version if version" do
+    it "will limit return version to matching major version when version is provided" do
       version = SemanticVersion.new(
         major: 71,
         minor: 22,

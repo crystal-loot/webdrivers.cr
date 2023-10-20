@@ -1,5 +1,5 @@
 module Webdrivers::Cache
-  def self.fetch(cache_path : String, expires_in : Time::Span, &block)
+  def self.fetch(cache_path : String, expires_in : Time::Span, &)
     value = read(cache_path, expires_in)
     return value if value
 

@@ -9,7 +9,7 @@ class Webdrivers::Common::TarGzExtractor
   def extract
     Compress::Gzip::Reader.open(file) do |gzip|
       Crystar::Reader.open(gzip) do |tar|
-        entry = tar.next_entry.not_nil!
+        entry = tar.next_entry.as(Crystar::Header)
         destination_path = File.join(install_path, entry.name)
         File.delete(destination_path) if File.exists?(destination_path)
         File.write(destination_path, entry.io)

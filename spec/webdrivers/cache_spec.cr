@@ -38,7 +38,7 @@ describe Webdrivers::Cache do
   end
 end
 
-private def with_tempfile
+private def with_tempfile(&)
   tempfile = File.tempfile(suffix: ".txt") do |file|
     file.print("hello!")
   end
@@ -47,7 +47,7 @@ ensure
   tempfile.try(&.delete)
 end
 
-private def with_missing_file
+private def with_missing_file(&)
   tempname = File.tempname(suffix: ".txt")
   yield tempname
 ensure

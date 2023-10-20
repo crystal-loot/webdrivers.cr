@@ -70,7 +70,7 @@ class Webdrivers::Chrome::InstallDriverExecutor
     when Common::OS::Linux
       "linux64"
     when Common::OS::Mac
-      "mac-arm64"
+      "mac-x64"
     when Common::OS::Windows
       "win32"
     else

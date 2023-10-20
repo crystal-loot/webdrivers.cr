@@ -12,15 +12,35 @@ class Webdrivers::Chrome::DriverRemoteVersionFinder
 
   private def find_raw_version
     Cache.fetch(cache_path, Webdrivers.settings.cache_duration) do
-      response = HTTP::Client.get("https://chromedriver.storage.googleapis.com/#{latest_release}")
-      response.body
+      if v = version
+        if v.major < 113
+          fetch_legacy_version(v)
+        else
+          fetch_latest_version(v)
+        end
+      else
+        fetch_latest_stable
+      end
     end
   end
 
-  private def latest_release
-    limitting_version = version
-    return "LATEST_RELEASE" if limitting_version.nil?
+  private def fetch_legacy_version(version : SemanticVersion)
+    response = HTTP::Client.get("https://chromedriver.storage.googleapis.com/LATEST_RELEASE_#{version.major}")
+    response.body
+  end
 
-    "LATEST_RELEASE_#{limitting_version.major}"
+  private def fetch_latest_version(version : SemanticVersion)
+    response = HTTP::Client.get("#{chrome_for_testing_base_url}/LATEST_RELEASE_#{version.major}")
+    response.body
+  end
+
+  private def fetch_latest_stable
+    response = HTTP::Client.get("#{chrome_for_testing_base_url}/last-known-good-versions-with-downloads.json")
+    google = JSON.parse(response.body)
+    google.dig("channels", "Stable", "version").as_s
+  end
+
+  private def chrome_for_testing_base_url : String
+    "https://googlechromelabs.github.io/chrome-for-testing"
   end
 end

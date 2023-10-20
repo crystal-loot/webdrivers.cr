@@ -17,7 +17,7 @@ class Webdrivers::Geckodriver
 
   def self.install : String
     Gecko::InstallDriverExecutor.new(
-      install_version: latest_driver_version.not_nil!,
+      install_version: latest_driver_version.as(SemanticVersion),
       current_version: driver_version,
       driver_directory: Common.driver_directory,
       driver_name: driver_name

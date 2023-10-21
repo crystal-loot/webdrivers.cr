@@ -4,7 +4,6 @@ module Webdrivers::Chrome
   describe DriverRemoteVersionFinder do
     Spec.after_each do
       finder = DriverRemoteVersionFinder.new(Common.driver_directory, cache_file: "chromedriver.version.test")
-      # Clear cache again after runs
       Webdrivers::Cache.delete(finder.cache_path)
     end
 

@@ -2,7 +2,9 @@ require "../../spec_helper"
 
 module Webdrivers::Chrome
   describe DriverRemoteVersionFinder do
-    Spec.after_each do
+    Spec.around_each do |example|
+      example.run
+    ensure
       finder = DriverRemoteVersionFinder.new(Common.driver_directory, cache_file: "chromedriver.version.test")
       Webdrivers::Cache.delete(finder.cache_path)
     end

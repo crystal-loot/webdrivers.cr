@@ -9,6 +9,12 @@ module Webdrivers::Cache
     value
   end
 
+  def self.delete(cache_path) : Nil
+    if File.exists?(cache_path)
+      File.delete(cache_path)
+    end
+  end
+
   private def self.write(value, expires_in, cache_path)
     ensure_cache_path(File.dirname(cache_path))
 

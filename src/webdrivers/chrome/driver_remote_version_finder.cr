@@ -2,8 +2,8 @@ class Webdrivers::Chrome::DriverRemoteVersionFinder
   getter cache_path : String
   getter version : SemanticVersion?
 
-  def initialize(driver_directory, @version = nil)
-    @cache_path = File.join(driver_directory, "chromedriver.version")
+  def initialize(driver_directory, @version = nil, cache_file = "chromedriver.version")
+    @cache_path = File.join(driver_directory, cache_file)
   end
 
   def find : SemanticVersion?

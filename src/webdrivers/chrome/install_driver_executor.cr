@@ -17,7 +17,7 @@ class Webdrivers::Chrome::InstallDriverExecutor
     if install_version.major < 115
       normalized_driver_name = driver_name
     else
-      normalized_driver_name = File.join("chromedriver-#{download_url_platform}", driver_name)
+      normalized_driver_name = "chromedriver-#{download_url_platform}/#{driver_name}"
     end
 
     FileUtils.cd(driver_directory) do

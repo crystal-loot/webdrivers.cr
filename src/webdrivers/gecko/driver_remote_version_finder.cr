@@ -1,8 +1,8 @@
 class Webdrivers::Gecko::DriverRemoteVersionFinder
   getter cache_path : String
 
-  def initialize(driver_directory)
-    @cache_path = File.join(driver_directory, "geckodriver.version")
+  def initialize(driver_directory, cache_file = "geckodriver.version")
+    @cache_path = File.join(driver_directory, cache_file)
   end
 
   def find : SemanticVersion?

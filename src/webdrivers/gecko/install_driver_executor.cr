@@ -55,7 +55,8 @@ class Webdrivers::Gecko::InstallDriverExecutor
     when Common::OS::Linux
       "geckodriver-#{version_tag}-linux64.tar.gz"
     when Common::OS::Mac
-      "geckodriver-#{version_tag}-macos.tar.gz"
+      arch = Common.aarch64? ? "macos-aarch64" : "macos"
+      "geckodriver-#{version_tag}-#{arch}.tar.gz"
     when Common::OS::Windows
       "geckodriver-#{version_tag}-win64.zip"
     else

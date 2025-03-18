@@ -13,6 +13,11 @@ module Webdrivers::Common
     {% end %}
   end
 
+  @[AlwaysInline]
+  def self.aarch64?
+    {{ flag?(:aarch64) }}
+  end
+
   def self.driver_directory
     File.expand_path(Webdrivers.settings.driver_directory, home: Path.home)
   end

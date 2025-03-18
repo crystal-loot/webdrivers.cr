@@ -2,9 +2,9 @@ name: Webdrivers CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   check-format:
@@ -25,16 +25,19 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # Available images https://github.com/actions/runner-images?tab=readme-ov-file#available-images
         include:
           - os: ubuntu-latest
             crystal: latest
           - os: windows-latest
             crystal: latest
-          - os: macos-latest
+          - os: macos-13 # Intel platform
+            crystal: latest
+          - os: macos-latest # ARM platform
             crystal: latest
     runs-on: ${{matrix.os}}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable

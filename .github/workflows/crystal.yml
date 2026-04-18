@@ -31,8 +31,6 @@ jobs:
             crystal: latest
           - os: windows-latest
             crystal: latest
-          - os: macos-latest-intel # Intel platform
-            crystal: latest
           - os: macos-latest # ARM platform
             crystal: latest
     runs-on: ${{matrix.os}}

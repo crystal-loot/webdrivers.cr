@@ -1,4 +1,8 @@
 class Webdrivers::Gecko::InstallDriverExecutor
+  class DownloadError < Exception; end
+
+  MAX_DOWNLOAD_ATTEMPTS = 2
+
   getter install_version : SemanticVersion
   getter current_version : SemanticVersion?
   getter driver_directory : String
@@ -21,13 +25,38 @@ class Webdrivers::Gecko::InstallDriverExecutor
   end
 
   private def download_file(from, to) : File
-    HTTP::Client.get(from) do |redirect_response|
-      HTTP::Client.get(redirect_response.headers["location"]) do |response|
-        File.write(to, response.body_io)
+    MAX_DOWNLOAD_ATTEMPTS.times do |i|
+      begin
+        resolved_url = resolve_redirects(from)
+        HTTP::Client.get(resolved_url) do |response|
+          unless response.success?
+            raise DownloadError.new("Failed to download #{resolved_url}: HTTP #{response.status_code}")
+          end
+          File.write(to, response.body_io)
+        end
+        break
+      rescue ex : IO::Error | Socket::Error | DownloadError
+        sleep((i + 1).seconds)
       end
     end
 
     File.new(to)
+  end
+
+  private def resolve_redirects(url : String) : String
+    response = HTTP::Client.get(url)
+
+    if response.status.redirection?
+      location = response.headers["location"]?
+      if location.nil? || location.empty?
+        raise DownloadError.new("Redirect from #{url} missing Location header (status #{response.status_code})")
+      end
+      location
+    elsif response.success?
+      url
+    else
+      raise DownloadError.new("Unexpected response from #{url}: HTTP #{response.status_code}")
+    end
   end
 
   private def extract_file(file)

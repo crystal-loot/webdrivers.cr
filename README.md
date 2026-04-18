@@ -45,12 +45,7 @@ Flatpak exports) for a Chrome/Chromium binary in order to detect the installed
 version. Two environment variables let you override that search when your
 install lives somewhere unusual:
 
-- `WEBDRIVERS_CHROME_BINARY` — absolute path to the Chrome binary. When set,
-  the search is skipped and this path is used directly.
-- `WEBDRIVERS_CHROME_BINARY_NAME` — a binary name to look for in the standard
-  directories, in addition to the built-in names (`google-chrome`, `chrome`,
-  `chromium`, `chromium-browser`, `com.google.Chrome`). Useful if your
-  distribution ships Chrome under a different name.
+- `WEBDRIVERS_CHROME_BINARY` — absolute path to the Chrome binary. When set, the search is skipped and this path is used directly.
 
 ## Development
 

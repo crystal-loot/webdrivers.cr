@@ -57,10 +57,6 @@ class Webdrivers::Chrome::BrowserVersionFinder
     ]
     files = ["google-chrome", "chrome", "chromium", "chromium-browser", "com.google.Chrome"]
 
-    if name = ENV["WEBDRIVERS_CHROME_BINARY_NAME"]?.presence
-      files.unshift(name)
-    end
-
     directories.each do |dir|
       files.each do |file|
         option = File.join(dir, file)

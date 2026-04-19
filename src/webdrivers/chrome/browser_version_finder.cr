@@ -17,6 +17,10 @@ class Webdrivers::Chrome::BrowserVersionFinder
   end
 
   private def windows_location : String?
+    if path = ENV["WEBDRIVERS_CHROME_BINARY"]?.presence
+      return path
+    end
+
     envs = ["LOCALAPPDATA", "PROGRAMFILES", "PROGRAMFILES(X86)"]
     directories = [
       Path.new("Google", "Chrome", "Applications"),
@@ -35,8 +39,23 @@ class Webdrivers::Chrome::BrowserVersionFinder
   end
 
   private def linux_location : String?
-    directories = ["/usr/local/sbin", "/usr/local/bin", "/usr/sbin", "/usr/bin", "/sbin", "/bin", "/snap/bin", "/opt/google/chrome"]
-    files = ["google-chrome", "chrome", "chromium", "chromium-browser"]
+    if path = ENV["WEBDRIVERS_CHROME_BINARY"]?.presence
+      return path
+    end
+
+    directories = [
+      "/usr/local/sbin",
+      "/usr/local/bin",
+      "/usr/sbin",
+      "/usr/bin",
+      "/sbin",
+      "/bin",
+      "/snap/bin",
+      "/opt/google/chrome",
+      "/var/lib/flatpak/exports/bin",
+      File.expand_path("~/.local/share/flatpak/exports/bin", home: Path.home),
+    ]
+    files = ["google-chrome", "chrome", "chromium", "chromium-browser", "com.google.Chrome"]
 
     directories.each do |dir|
       files.each do |file|
@@ -49,6 +68,10 @@ class Webdrivers::Chrome::BrowserVersionFinder
   end
 
   private def mac_location : String?
+    if path = ENV["WEBDRIVERS_CHROME_BINARY"]?.presence
+      return path
+    end
+
     directories = ["", File.expand_path("~", home: Path.home)]
     files = [
       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",

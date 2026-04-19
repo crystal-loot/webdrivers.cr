@@ -13,7 +13,7 @@ It automatically installs and updates supported webdrivers.
    ```yaml
    dependencies:
      webdrivers:
-       github: matthewmcgarvey/webdrivers.cr
+       github: crystal-loot/webdrivers.cr
    ```
 
 2. Run `shards install`
@@ -38,13 +38,28 @@ webdriver_path = Webdrivers::Chromedriver.install
 webdriver_path = Webdrivers::Geckodriver.install
 ```
 
+### Locating the Chrome browser
+
+On Linux, Webdrivers searches a list of common install paths (including Snap and
+Flatpak exports) for a Chrome/Chromium binary in order to detect the installed
+version. Two environment variables let you override that search when your
+install lives somewhere unusual:
+
+- `WEBDRIVERS_CHROME_BINARY` — absolute path to the Chrome binary. When set, the search is skipped and this path is used directly.
+
 ## Development
 
-TODO: Write development instructions here
+- Fork
+- Code
+- `crystal tool format spec/ src/`
+- `./bin/ameba`
+- `crystal spec`
+- Commit
+- Open PR
 
 ## Contributing
 
-1. Fork it (<https://github.com/matthewmcgarvey/webdrivers.cr/fork>)
+1. Fork it (<https://github.com/crystal-loot/webdrivers.cr/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

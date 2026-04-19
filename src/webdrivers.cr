@@ -9,7 +9,7 @@ require "semantic_version"
 require "./webdrivers/**"
 
 module Webdrivers
-  VERSION                  = "0.4.4"
+  VERSION                  = "0.4.5"
   DEFAULT_DRIVER_DIRECTORY = "~/.webdrivers"
 
   Habitat.create do
